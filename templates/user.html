@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{u.username}} | Dashboard</title>
+</head>
+<body>
+	<h1>Dashboard</h1>
+	<h3>Welcome {{u.username}}!</h3>
+	<b>Group: {{group}}</b>
+	{% if group == 'Admin' %}
+	<div>
+		<a href="#">Home</a>
+		<a href="#">Add New Articles</a>
+		<a href="#">Article Manager</a>
+		<a href="#">Users/Classes</a>
+		<a href="#">Add New Challenge</a>
+		<a href="#">Challenge Manager</a>
+	</div>
+	{% elif group == 'Teacher' %}
+	<div>
+		<a href="#">Home</a>
+		<a href="#">Add New Articles</a>
+		<a href="#">Article Manager</a>
+		<a href="#">Users/Classes</a>
+		<a href="#">Add New Challenge</a>
+		<a href="#">Challenge Manager</a>
+	</div>
+	{% elif group == 'Student' %}
+	<div>
+		<a href="#">Home</a>
+		<a href="#">Progress Report</a>
+		<a href="#">Ranking</a>
+		<a href="#">Challenges</a>
+	</div>
+	{% endif %}
+	<a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>
