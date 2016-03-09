@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hackademic',
+    'lettuce.django',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -72,6 +73,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Hackademic.wsgi.application'
 
 LOGIN_URL = 'login'
+
+LETTUCE_TEST_SERVER = 'lettuce.django.server.DjangoServer'
+LETTUCE_SERVER_PORT = 7000
+LETTUCE_USE_TEST_DATABASE = True
+LETTUCE_APPS = (
+    'hackademic',
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases

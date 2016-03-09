@@ -5,9 +5,9 @@
 	<title>Register</title>
 </head>
 <body>
-	<h1>Register</h1>
+	<h3 id="heading">Register</h3>
 	<form action="/register/" method="post">
-		{% csrf_token %}
+		<!-- {% csrf_token %} -->
 		{{user_form.as_p}}
 		<select name="type">
 		  <option value="Student">Student</option>

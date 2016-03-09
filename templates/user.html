@@ -6,8 +6,9 @@
 </head>
 <body>
 	<h1>Dashboard</h1>
-	<h3>Welcome {{u.username}}!</h3>
+	<h3 id="heading">Welcome {{u.username}}!</h3>
 	<b>Group: {{group}}</b>
+	<a href="{% url 'logout' %}">Logout</a>
 	{% if group == 'Admin' %}
 	<div>
 		<a href="#">Home</a>
@@ -16,6 +17,14 @@
 		<a href="#">Users/Classes</a>
 		<a href="#">Add New Challenge</a>
 		<a href="#">Challenge Manager</a>
+	</div>
+	<div>
+		<p><b>Username | Email | Date Joined | Last Login | Is active</b></p>	
+		{% for user in users %}
+		<p><a href="/edituser?user={{user.username}}">{{user.username}}</a> | {{user.email}} | {{user.date_joined}} | {{user.last_login}} | {{user.is_active}}</p>
+		{% empty %}
+		<p>No users Registered</p>
+		{% endfor %}
 	</div>
 	{% elif group == 'Teacher' %}
 	<div>
@@ -34,6 +43,5 @@
 		<a href="#">Challenges</a>
 	</div>
 	{% endif %}
-	<a href="{% url 'logout' %}">Logout</a>
 </body>
 </html>

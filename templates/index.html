@@ -7,9 +7,11 @@
 <body>
 	<h1>Hackademic</h1>
 	{% if request.user.is_authenticated %}
+		<h3 id="heading">Hi {{request.user}}</h3>
 		<a href="{% url 'user'%}">Dashboard</a>
 		<a href="{% url 'logout' %}">Logout</a>
 	{% else %}
+		<h3 id="heading">Hi Anonymous!</h3>
 		<a href="{% url 'login' %}">Login</a><br>
 		<a href="{% url 'register' %}">Create New Account</a>
 	{% endif %}

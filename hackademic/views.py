@@ -3,11 +3,13 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
 from django.http import HttpResponse
 
 from hackademic.forms import UserForm
 
+@csrf_exempt
 def register(request):
 	context = {}
 
@@ -46,12 +48,13 @@ def register(request):
 	#Render the register.html template
 	return render(request, 'register.html', context)
 
+@csrf_exempt
 def login(request):
 	context = {}
 
 	if request.method == "POST":
 		username = request.POST['username']
-		pwd = request.POST['pwd']
+		pwd = request.POST['password']
 
 		#Checking username and password
 		user = authenticate(username=username, password=pwd)
@@ -84,10 +87,37 @@ def index(request):
 
 @login_required
 def user(request):
+	context = {}
 	u = request.user
+	context['u'] = u
 	try:
 		group = u.groups.get().name
+		context['group'] = group
 		print group
 	except Group.MultipleObjectsReturned as e:
 		return HttpResponse(e)
-	return render(request, 'user.html', {'group':group, 'u':u})
+
+	if group != "Student":
+		users = User.objects.all()
+		context['users'] = users
+
+	return render(request, 'user.html', context)
+
+@login_required
+def edituser(request):
+	context = {}
+	if request.method == "POST":
+		# u.username = request.GET['username']
+		# email = request.GET['email']
+		# name = request.GET['name']
+		# type_ = request.GET['type']
+		pass
+	else:
+		username = request.GET['user']
+		try:
+			user = User.objects.get(username=username)
+		except User.DoesNotExist as e:
+			return HttpResponse(e)
+
+		context['user'] = user
+		return render(request, 'edituser.html', context)

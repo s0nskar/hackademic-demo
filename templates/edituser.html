@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Edit User</title>
+</head>
+<body>
+	<h1>Hackademic</h1>
+	<h3>Edit user</h3>
+	<form method="post">
+		{% csrf_token %}
+		<label for="username">Username: </label>
+			<input type="text" id="username" value={{user.username}}>
+		<label for="email">Email: </label>
+			<input type="text" id="email" value={{user.email}}>
+		<label for="name">Name: </label>
+			<input type="text" id="name" value={{user.first_name}}>
+		<label for="type">Type: </label>
+		<select name="type" id="type">
+		  <option value="Student">Student</option>
+		  <option value="Teacher">Teacher</option>
+		  <option value="Admin">Admin</option>
+		</select>
+		<input type="submit" value="Edit User">
+	</form>
+	<form action="/deleteuser" method="post">
+		{% csrf_token %}
+		<input type="submit" value="Delete user">
+	</form>
+</body>
+</html>
