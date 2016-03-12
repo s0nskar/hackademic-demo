@@ -1,0 +1,19 @@
+<h3 id="heading">Article Manager</h3>
+<table>
+	{% for article in articles%}
+	<tr>
+		<td><a href="">{{article.title}}</a></td>
+		<td>{{article.date_posted}}</td>
+		<td>{{article.created_by}}</td>
+		<td>{{article.last_modified}}</td>
+		<td>{{article.last_modified_by}}</td>
+		{% if article.is_published %}
+		<td>YES</td>
+		{% else %}
+		<td>NO</td>
+		{% endif %}
+	</tr>
+	{% empty %}
+	<p>No articles yet!!</p>
+	{% endfor %}
+</table>

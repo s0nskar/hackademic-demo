@@ -4,9 +4,9 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-
 from django.http import HttpResponse
 
+from hackademic.models import Article
 from hackademic.forms import UserForm
 
 @csrf_exempt
@@ -121,3 +121,10 @@ def edituser(request):
 
 		context['user'] = user
 		return render(request, 'edituser.html', context)
+
+@login_required
+def articlemanager(request):
+	context = {}
+	articles = Article.objects.all()
+	context['articles'] = articles
+	return render(request, 'articlemanager.html', context)
