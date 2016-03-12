@@ -125,6 +125,17 @@ def edituser(request):
 @login_required
 def articlemanager(request):
 	context = {}
-	articles = Article.objects.all()
-	context['articles'] = articles
-	return render(request, 'articlemanager.html', context)
+	if request.user.has_perm('hackademic.add_article'):
+		articles = Article.objects.all()
+		context['articles'] = articles
+		return render(request, 'articlemanager.html', context)
+	else:
+		return HttpResponse("You're not allowed to play here!!")
+
+@login_required
+def addarticle(request):
+	context = {}
+	if request.user.has_perm('hackademic.add_article'):
+		return render(request, 'addarticle.html', context)
+	else:
+		return HttpResponse("You're not allowed to play here!!")

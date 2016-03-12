@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^user/$', views.user, name='user'),
     url(r'^edituser/$', views.edituser, name='edituser'),
     url(r'^articlemanager/$', views.articlemanager, name='articlemanager'),
+    url(r'^articlemanager/addarticle/$', views.addarticle, name='addarticle'),
 ]
